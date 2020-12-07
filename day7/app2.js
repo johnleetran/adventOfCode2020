@@ -35,57 +35,42 @@ function praseData(dataArray) {
                 let name = sRule.split(/\d+\s+/)
                 name = name.filter(Boolean);
                 let quantity = parseInt(sRule.split(" ")[0]);
-                //console.log(name[0], " ", quantity)
-                subBags.push({ name: name[0], quantity: quantity })
+                let sb = new SubBag(name[0], quantity)
+                if(sb.name == 'no other bag'){
+                    sb.quantity = 0;
+                }
+                subBags.push(sb)
             }
         }
 
         let bag = new Bag(mainBag, subBags)
-        bags[bag.name] = subBags;//[];
-        // for (let i = 0; i < bag.subBags.length; i++) {
-        //     bags[bag.name].push()
-        // }
+        bags[bag.name] = [];
+        for (let i = 0; i < subBags.length; i++) {
+            bags[bag.name].push(subBags[i])
+        }
     }
     return bags;
 }
 
-function traverse(key, val, tree) {
+function traverse(bag, tree) {
     let num = 1;
-    if (tree[key].includes('no other bag')){
+    if (bag.name == 'no other bag' || tree[bag.name] == 'no other bag'){
         return 0;
     }else{
-        for (let i = 0; i < tree[key].length; i++){
-            num *= traverse(tree[key][i], tree[key], tree)
+        for (let i = 0; i < tree[bag.name].length; i++){
+            if (tree[bag.name][i].quantity != 0){
+                num += tree[bag.name][i].quantity * traverse(tree[bag.name][i], tree)
+            }
         }       
     }
     return num
-
-    // console.log(key)
-    // let hasBag = false;
-    // if (tree[key].includes('no other bag')) {
-    //     hasBag = false;
-    // } else if (tree[key].includes('shiny gold bag')) {
-    //     hasBag = true;
-    // } else {
-    //     for (let i = 0; i < tree[key].length; i++) {
-    //         hasBag = hasBag || traverse(tree[key][i], tree[key], tree)
-    //     }
-    // }
-    // return hasBag;
 }
 
-function getNumCombos(bags) {
+function getNumCombos(tree) {
     let num = 0;
-    for(let bag of bags['shiny gold bag']){
-        console.log(bag)
+    for (let bag of tree['shiny gold bag']){
+        num += bag.quantity * traverse(bag, tree)
     }
-    // for (const [key, value] of Object.entries(bags)) {
-    //     //console.log("root: ", key)
-    //     let isIn = traverse(key, value, bags)
-    //     if (isIn) {
-    //         num += 1;
-    //     }
-    // }
     return num;
 }
 
