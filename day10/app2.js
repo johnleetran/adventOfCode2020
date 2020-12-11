@@ -9,7 +9,7 @@ let diff2 = 0;
 let diff3 = 0;
 let maxAdapterValue = Math.max(...dataArray);
 
-function search(data, jolt, memo, target){
+function search(dataArray, jolt, memo, target){
     if(jolt == target){
         return 1;
     }
@@ -39,8 +39,9 @@ function search(data, jolt, memo, target){
 }
 
 let memo = {};
-console.log(search(dataArray, 0, memo, maxAdapterValue))
 
+console.log(search(dataArray, 0, memo, maxAdapterValue))
+console.log(memo)
 // let done = false;
 // while (true) {
 //     let diffJoltIndex1 = dataArray.indexOf(currentJolt + 1)
