@@ -5,7 +5,7 @@ let findPos = 30000000
 let spoken = {}
 
 for (let i = 0; i < 30000000; i++){
-    spoken[i] = new Array(2).fill(0);
+    spoken[i] = new Array().fill(0);
 }
 
 function addToSpoken(num, turn){
