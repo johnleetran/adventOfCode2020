@@ -1,0 +1,3 @@
+/Users/john/Documents/code/advent-of-code-2020/day22/build/CMakeFiles/main.dir
+/Users/john/Documents/code/advent-of-code-2020/day22/build/CMakeFiles/ALL_BUILD.dir
+/Users/john/Documents/code/advent-of-code-2020/day22/build/CMakeFiles/ZERO_CHECK.dir
