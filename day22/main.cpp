@@ -46,12 +46,15 @@ Winner play(std::deque<int> &player1, std::deque<int> &player2, std::set<std::st
         int card2 = player2.front(); player2.pop_front();
 
         if(player1.size() >= card1 && player2.size() >= card2){
-            std::deque<int> p1 = player1;
-            //std::copy(std::begin(player1), std::end(player1), std::begin(p1));
-
-            std::deque<int> p2 = player2;
-            //std::copy(std::begin(player2), std::end(player2), std::begin(p2));
-
+            std::deque<int> p1{};
+            for(int i=0; i<card1; i++){
+                p1.push_back(player1.at(i));
+            }
+            
+            std::deque<int> p2{};
+            for(int i=0; i<card2; i++){
+                p2.push_back(player2.at(i));
+            }
             std::set<std::string> newSeen{};
             winner = play(p1, p2, newSeen);
         }else{
